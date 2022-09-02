@@ -3328,8 +3328,8 @@ vm-browserify@^1.0.1:
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
 vortex-api@Nexus-Mods/vortex-api:
-  version "1.2.11-r8"
-  resolved "https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/01b7f099ed478a769ce511a6e57b50ba0a67492d"
+  version "1.6.0-r5"
+  resolved "https://codeload.github.com/Nexus-Mods/vortex-api/tar.gz/ac3dfdd18725058510eca453cc4fa1a4718d73a7"
 
 warning@^3.0.0:
   version "3.0.0"

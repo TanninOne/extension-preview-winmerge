@@ -8,11 +8,19 @@ import { InputGroup, FormControl, HelpBlock } from 'react-bootstrap';
 const DEFAULT_PATH = String.raw`C:\Program Files (x86)\WinMerge\WinMergeU.exe`;
 
 function previewHandler(api: types.IExtensionApi, winmergePath: string, files: any) {
-  return new Promise(resolve => {
-    const proc = spawn(winmergePath, [files[0].filePath, files[1].filePath]);
-    proc.on('exit', () => {
-      resolve(null);
-    });
+  return new Promise((resolve, reject) => {
+    try {
+      const proc = spawn(winmergePath, [files[0].filePath, files[1].filePath]);
+      proc
+        .on('error', err => {
+          reject(err);
+        })
+        .on('exit', () => {
+          resolve(null);
+        });
+    } catch (err) {
+      reject(err);
+    }
   });
 }
 
@@ -87,7 +95,7 @@ function init(context: types.IExtensionContext) {
     reducers: { [setWinmergePath as any]: (state, payload) => util.setSafe(state, ['winmergePath'], payload) },
   });
 
-  (context as any).registerPreview(150, (files: any[], allowPick: boolean) => {
+  context.registerPreview(150, (files: any[], allowPick: boolean) => {
     const state: any = context.api.getState();
     return previewHandler(context.api, state.settings.tools.winmergePath, files);
   });
